@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-05-21
+
+### Changed
+- The skill is now self-contained: removed the bundled `agent-knowledge/` deep-dive guide and instead link to current upstream docs (mojolang.org/docs, releases, github.com/modular/modular). Deep-dive material would drift from a fast-moving language; the online docs are the source of truth.
+
 ## [0.1.0] - 2026-05-21
 
 ### Added

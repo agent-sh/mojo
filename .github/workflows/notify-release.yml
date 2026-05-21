@@ -1,0 +1,52 @@
+name: Notify release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to file the reminder for (e.g. v0.1.1)"
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  open-pin-reminder:
+    name: Open marketplace-pin reminder
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ensure release label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh label create release --repo "$REPO" --color FBCA04 \
+            --description "Release tracking" --force
+
+      - name: Create issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
+          URL: ${{ github.event.release.html_url }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh issue create \
+            --repo "$REPO" \
+            --title "Bump agentsys marketplace pin to mojo $TAG" \
+            --label "release" \
+            --body "$(cat <<EOF
+          mojo \`$TAG\` was published${URL:+ ($URL)}.
+
+          The agentsys marketplace pins mojo to an immutable tag + commit, so it does not pick this up automatically. Update the pin so users get the new version:
+
+          1. In \`agent-sh/agentsys\`, the \`mojo\` entry in \`.claude-plugin/marketplace.json\` must point \`ref\` at \`$TAG\` and \`commit\` at that tag's resolved SHA.
+          2. Run \`node scripts/pin-marketplace.js\` (needs \`gh\` auth) - it resolves the tag to a commit and rewrites the entry.
+          3. Confirm \`npx jest marketplace-standalone-contract\` passes, then open a PR.
+
+          Auto-filed by the mojo \`Notify release\` workflow.
+          EOF
+          )"

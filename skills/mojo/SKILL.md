@@ -73,15 +73,15 @@ GPU
 
 ## Workflow
 1. Confirm the target is Mojo and note the toolchain version if discoverable (`mojo --version`, `pixi.lock`).
-2. Apply the version table and core rules on every task. For anything beyond a trivial snippet - and always for possibly-unstable APIs (GPU tensor types, `vectorize`/`parallelize` signatures, `LayoutTensor` vs `TileTensor`) - read the deep-dive reference below before committing to syntax.
+2. Apply the version table and core rules on every task. For possibly-unstable APIs (GPU tensor types, `vectorize`/`parallelize` signatures, `LayoutTensor` vs `TileTensor`), verify against current docs (see References) before committing to syntax.
 3. For new code, prefer typed errors and explicit ownership. For ports, translate stale constructs via the version table first, then idiomatize.
 4. Verify: build/run with `mojo run` (or `mojo build`); write tests as `test_*` functions discovered by `TestSuite`.
 
-## Deep-dive reference
-Full guide (667 lines, 41 sources, current to v1.0.0b1) with extended examples, the value lifecycle, traits, GPU memory hierarchy, tiling, occupancy math, and a best-practices checklist:
+## References
+Verify any unstable or non-obvious API against current upstream docs (Mojo is young; stdlib outside stabilized-API markers still changes):
 
-- `agent-knowledge/mojo-best-practices-performance-gpu.md` (this repo)
-- Source metadata: `agent-knowledge/resources/mojo-best-practices-performance-gpu-sources.json`
-- Knowledge-base index and routing: `agent-knowledge/README.md`
-
-Read it when a task needs detail beyond the core rules above, or when you must verify an API against current docs. Canonical upstream: `mojolang.org/docs/`, releases at `mojolang.org/releases/`, ground-truth source at `github.com/modular/modular`.
+- Manual: https://mojolang.org/docs/manual/
+- Stdlib reference: https://mojolang.org/docs/stdlib/
+- Releases / changelog (breaking changes by version): https://mojolang.org/releases/
+- GPU: https://mojolang.org/docs/manual/gpu/fundamentals/ and the intro tutorial under the same path
+- Ground-truth source (stdlib + MAX kernels): https://github.com/modular/modular

@@ -1,6 +1,6 @@
 {
   "name": "mojo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Teach coding agents to write idiomatic, correct, performant, current Mojo (Modular's language)",
   "skills": "./skills",
   "interface": {

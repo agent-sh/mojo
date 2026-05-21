@@ -10,7 +10,7 @@ Mojo is young and fast-moving. The dominant failure mode for agents is emitting 
 - Core rules for idiomatic structs, traits, ownership, `comptime` metaprogramming, and typed error handling.
 - Performance guidance: `SIMD`, `vectorize`/`parallelize`/`elementwise`, `@always_inline`, `LayoutTensor`, benchmarking.
 - GPU guidance: `DeviceContext`, kernels, the thread/block/grid model, shared memory, `barrier()`, warps, occupancy (NVIDIA / AMD / Apple).
-- Routes deep dives to a 41-source research guide in `agent-knowledge/`.
+- Links to current upstream docs (mojolang.org) for depth, rather than bundling a deep-dive guide that would drift.
 
 ## Installation
 
@@ -38,13 +38,9 @@ It does not activate for Python, Rust, C++, or Modular MAX serving/deployment co
 ## Layout
 
 ```
-skills/mojo/SKILL.md                  the skill (version map + core rules + workflow)
-agent-knowledge/
-  mojo-best-practices-performance-gpu.md   deep-dive research guide (41 sources)
-  resources/                          source metadata with confidence ratings
-  README.md                           knowledge-base index
-.claude-plugin/                       Claude Code plugin + marketplace manifests
-.codex-plugin/                        Codex plugin manifest
+skills/mojo/SKILL.md     the skill (version map + core rules + workflow + doc links)
+.claude-plugin/          Claude Code plugin + marketplace manifests
+.codex-plugin/           Codex plugin manifest
 ```
 
 ## Development

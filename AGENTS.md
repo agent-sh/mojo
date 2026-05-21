@@ -8,7 +8,7 @@ Follow the Karpathy Guidelines (simplicity, surgical changes, clear success crit
 
 ## Writing Mojo (read first)
 
-Before writing, porting, or reviewing any Mojo, read `agent-knowledge/mojo-best-practices-performance-gpu.md` and prefer it over pretrained knowledge. WHY: Mojo changed substantially in 2025-2026, so pretrained Mojo syntax is likely stale and will warn or fail to compile. The shipped skill at `skills/mojo/SKILL.md` carries the always-on version map (`def` not `fn`, `var`/`read`/`mut` not `owned`/`borrowed`/`inout`, `@fieldwise_init` not `@value`, `TileTensor`/`LayoutTensor` not `NDBuffer`, `TestSuite` not `mojo test`). Target version: Mojo v1.0.0b1.
+Before writing, porting, or reviewing any Mojo, apply `skills/mojo/SKILL.md` and prefer it over pretrained knowledge. WHY: Mojo changed substantially in 2025-2026, so pretrained Mojo syntax is likely stale and will warn or fail to compile. The skill carries the always-on version map (`def` not `fn`, `var`/`read`/`mut` not `owned`/`borrowed`/`inout`, `@fieldwise_init` not `@value`, `TileTensor`/`LayoutTensor` not `NDBuffer`, `TestSuite` not `mojo test`) plus links to current upstream docs. Target version: Mojo v1.0.0b1. Verify unstable APIs against https://mojolang.org/docs/, not memory.
 
 ## Project Instruction Files
 
@@ -33,7 +33,7 @@ Before writing, porting, or reviewing any Mojo, read `agent-knowledge/mojo-best-
 ## Skill Conventions
 
 - `skills/mojo/SKILL.md` is the authoritative source of truth for how agents write Mojo; mirror any guidance added here into it.
-- Keep the core skill short; route deep examples and reference material to `agent-knowledge/`.
+- Keep the skill self-contained; do not bundle deep-dive guides - link to current upstream docs (mojolang.org) for depth.
 - Prefer cross-tool features. Clearly gate any tool-specific behavior.
 - Triggers should fire on realistic prompts ("write Mojo", "port this to Mojo", "is this Mojo idiomatic"). Use "Skip unless:" gates to avoid false activation.
 - Ground Mojo guidance in current upstream docs, not memory - the language is young and changes fast. Cite sources for non-obvious rules.
@@ -64,5 +64,5 @@ Before considering changes complete:
 
 - Part of the [agent-sh](https://github.com/agent-sh) ecosystem
 - Mojo docs: https://mojolang.org/docs/ (canonical; old docs.modular.com Mojo URLs 301-redirect here)
-- Research foundation: `agent-knowledge/mojo-best-practices-performance-gpu.md`
+- Mojo releases / changelog: https://mojolang.org/releases/
 - https://agentskills.io

@@ -1,7 +1,7 @@
 {
   "name": "mojo",
   "description": "Skill that teaches coding agents to write idiomatic, correct, performant, current Mojo. Targets Mojo v1.0.0b1 and prevents stale pre-2025 syntax.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "owner": {
     "name": "Avi Fenesh",
     "url": "https://github.com/avifenesh"
@@ -11,7 +11,7 @@
       "name": "mojo",
       "source": "./",
       "description": "Write idiomatic, correct, performant, current Mojo - fundamentals, ownership, traits, comptime, performance (SIMD/vectorize/parallelize), and GPU kernels. Targets Mojo v1.0.0b1 and prevents stale pre-2025 syntax.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "development"
     }
   ]
