@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-05-21
+
+### Fixed
+- Corrected three stale syntax rules, verified against mojolang.org v1.0.0b1 docs and working code on Mojo 0.26.2.0: stdlib imports use the `std.` package prefix (`from std.sys import ...`); compile-time control flow is `comptime if`/`comptime for` (not `@parameter if`/`@parameter for`); copy/move constructors are keyword-only (`__init__(out self, *, copy: Self)` / `__init__(out self, *, deinit take: Self)`).
+- Fixed a dead stdlib reference URL (`/docs/stdlib/` -> `/docs/std/`).
+
+### Added
+- "SOTA blind spots" section - high-signal correction layer for high-performance Mojo (LLM inference/training on CPU memory and GPU), filtered to compile-fail, performance-killer, and post-knowledge-cutoff items: memory/copy semantics, pointer-type selection, CPU perf (SIMD, free-function `min`/`max`, explicit numeric conversion, string byte-indexing), GPU kernels (`flat_rank` assert, `enqueue_function` param binding, `rebind` for cross-layout accumulation, warp `UInt32` masks, `WARP_SIZE`, `is_`/`has_` dispatch, shared memory, async copy), Mojo/Python extension-module ABI, and ecosystem/versioning facts.
+- Iterator protocol shape (`__next__` raises `StopIteration`, `Iterable`/`IteratorType` conformance) and `Dict.items()` direct iteration.
+
 ## [0.1.1] - 2026-05-21
 
 ### Changed
