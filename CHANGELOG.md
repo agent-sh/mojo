@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Refreshed plugin/marketplace/Codex manifest descriptions to reflect the v0.2.0 scope: CPU/memory optimization and Mojo/Python interop, not just SIMD and GPU.
+
 ## [0.2.0] - 2026-05-21
 
 ### Fixed

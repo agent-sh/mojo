@@ -6,7 +6,7 @@
   "interface": {
     "displayName": "Mojo",
     "shortDescription": "Write idiomatic, current Mojo",
-    "longDescription": "Helps agents write, port, review, and optimize Mojo. Embeds the Mojo v1.0.0b1 version map to prevent stale pre-2025 syntax (fn, owned/borrowed/inout, @value, NDBuffer), with guidance for fundamentals, ownership, traits, comptime, performance (SIMD/vectorize/parallelize), and GPU kernels (DeviceContext, LayoutTensor).",
+    "longDescription": "Helps agents write, port, review, and optimize Mojo. Embeds the Mojo v1.0.0b1 version map to prevent stale pre-2025 syntax (fn, owned/borrowed/inout, @value, NDBuffer), plus a high-signal correction layer for the things strong models get wrong: copy/ownership semantics and CPU/memory optimization, SIMD/vectorize/parallelize, GPU kernels (DeviceContext, LayoutTensor/TileTensor, flat_rank, warp ops), and Mojo/Python interop and extension modules.",
     "developerName": "Avi Fenesh",
     "category": "developer-tools",
     "capabilities": [
