@@ -1,0 +1,4 @@
+tools = ["codex", "claude-code"]
+
+[rules]
+disabled_rules = ["VER-001"]

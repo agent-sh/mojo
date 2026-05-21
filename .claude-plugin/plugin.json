@@ -1,0 +1,23 @@
+{
+  "name": "mojo",
+  "version": "0.1.0",
+  "skills": "./skills",
+  "description": "Teach coding agents to write idiomatic, correct, performant, current Mojo (Modular's language). Targets Mojo v1.0.0b1 and prevents stale pre-2025 syntax.",
+  "author": {
+    "name": "Avi Fenesh",
+    "url": "https://github.com/avifenesh"
+  },
+  "homepage": "https://github.com/agent-sh/mojo",
+  "repository": "https://github.com/agent-sh/mojo",
+  "license": "MIT",
+  "keywords": [
+    "mojo",
+    "modular",
+    "max",
+    "gpu",
+    "simd",
+    "claude-code",
+    "codex",
+    "opencode"
+  ]
+}

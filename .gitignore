@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+.claude/settings.local.json
+
+# Mojo / Modular toolchain
+.pixi/
+pixi.lock
+*.mojopkg
+__pycache__/

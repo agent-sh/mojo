@@ -1,0 +1,25 @@
+{
+  "name": "mojo",
+  "version": "0.1.0",
+  "description": "Teach coding agents to write idiomatic, correct, performant, current Mojo (Modular's language)",
+  "skills": "./skills",
+  "interface": {
+    "displayName": "Mojo",
+    "shortDescription": "Write idiomatic, current Mojo",
+    "longDescription": "Helps agents write, port, review, and optimize Mojo. Embeds the Mojo v1.0.0b1 version map to prevent stale pre-2025 syntax (fn, owned/borrowed/inout, @value, NDBuffer), with guidance for fundamentals, ownership, traits, comptime, performance (SIMD/vectorize/parallelize), and GPU kernels (DeviceContext, LayoutTensor).",
+    "developerName": "Avi Fenesh",
+    "category": "developer-tools",
+    "capabilities": [
+      "code-authoring",
+      "performance-optimization",
+      "gpu-programming",
+      "code-review"
+    ],
+    "websiteUrl": "https://github.com/agent-sh/mojo",
+    "defaultPrompt": [
+      "Write a Mojo struct with SIMD ops",
+      "Port this Python function to Mojo",
+      "Write a GPU kernel in Mojo"
+    ]
+  }
+}
