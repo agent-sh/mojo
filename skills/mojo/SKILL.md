@@ -26,7 +26,7 @@ When you see the LEFT column in code, examples, or your own memory, it is STALE 
 | `@register_passable` / `@register_passable("trivial")` | `RegisterPassable` / `TrivialRegisterPassable` trait | Decorators removed; conform to the trait instead. |
 | `alias X = ...` | `comptime X = ...` | `comptime` is the modern compile-time value keyword. |
 | `@parameter if` / `@parameter for` | `comptime if` / `comptime for` | Compile-time branch/loop use `comptime`. `@parameter` decorator still valid on nested closures. |
-| `from sys import ...`, `from memory import ...` (stdlib) | `from std.sys import ...`, `from std.memory import ...` | Stdlib lives under the `std` package (`std.sys`, `std.memory`, `std.algorithm`, `std.gpu`, `std.python`, ...). `layout` is its own package, NOT `std.layout`. Verified on Mojo 0.26.2.0. |
+| `from sys import ...`, `from memory import ...` (stdlib) | `from std.sys import ...`, `from std.memory import ...` | Stdlib lives under the `std` package (`std.sys`, `std.memory`, `std.algorithm`, `std.gpu`, `std.python`, ...). `layout` is its own package, NOT `std.layout`. |
 | `constrained(cond, msg)` | `comptime assert cond, msg` | Must sit inside a function body, not at module/struct scope. |
 | `NDBuffer` | `TileTensor` / `LayoutTensor` | `NDBuffer` removed entirely. |
 | `DynamicVector` / `InlinedFixedVector` / stdlib `Tensor` | `List` / `InlineArray` / (no stdlib Tensor - use SIMD/List/UnsafePointer) | Removed collection types. |
