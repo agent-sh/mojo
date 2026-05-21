@@ -20,11 +20,13 @@ When you see the LEFT column in code, examples, or your own memory, it is STALE 
 | `owned arg` | `var arg` | `var` means the function takes ownership. |
 | `borrowed arg` | `read arg` (or omit - it is the default) | Immutable reference convention. |
 | `inout arg` | `mut arg` | Mutable reference convention. |
-| `__copyinit__` | `__init__(out self, copy: Self)` | Auto-synthesized for `Copyable` types. |
-| `__moveinit__` | `__init__(out self, take: Self)` | Auto-synthesized for `Movable` types. |
+| `__copyinit__` | `__init__(out self, *, copy: Self)` | Keyword-only `copy`. Auto-synthesized for `Copyable` types. |
+| `__moveinit__` | `__init__(out self, *, deinit take: Self)` | Keyword-only `deinit take`. Auto-synthesized for `Movable` types. |
 | `@value` | `@fieldwise_init` (+ derive `Copyable`, `Movable`) | `@value` superseded. |
 | `@register_passable` | conform to traits / `RegisterPassable` | Decorator removed. |
 | `alias X = ...` | `comptime X = ...` | `comptime` is the modern compile-time value keyword. |
+| `@parameter if` / `@parameter for` | `comptime if` / `comptime for` | Compile-time branch/loop use `comptime`. `@parameter` decorator still valid on nested closures. |
+| `from sys import ...`, `from memory import ...` (stdlib) | `from std.sys import ...`, `from std.memory import ...` | Stdlib lives under the `std` package (`std.sys`, `std.memory`, `std.algorithm`, `std.gpu`, `std.python`, ...). `layout` is its own package, NOT `std.layout`. Verified on Mojo 0.26.2.0. |
 | `NDBuffer` | `TileTensor` / `LayoutTensor` | `NDBuffer` removed entirely. |
 | `mojo test` CLI | `TestSuite` struct + `mojo run test_file.mojo` | `mojo test` removed 2025-10-31. |
 | `from pkg import x` binds `pkg` | binds only `x` | Import semantics tightened. |
@@ -47,10 +49,11 @@ Language and syntax
 - Use `def`. Functions are non-raising by default; add `raises` (prefer typed: `raises MyError`) to propagate errors.
 - Argument conventions: `read` (default, immutable ref), `mut` (mutable ref), `var` (takes ownership; pair with `^` at the call site), `ref` (parametric, advanced). Plus `out` (constructors/named results), `deinit` (destructors).
 - `struct` is the workhorse: static, no inheritance, fields declared with `var` + explicit type, initialized in `__init__`. Share behavior via traits (`Copyable`, `Movable`, `Stringable`, `Writable`, ...), not inheritance. Use `@fieldwise_init` for the field-wise constructor.
-- Compile-time `[parameters]` vs run-time `(arguments)` drives metaprogramming. `comptime` for constants/values; `@parameter for`/`@parameter if` for unrolling/branch selection.
+- Compile-time `[parameters]` vs run-time `(arguments)` drives metaprogramming. `comptime` for constants/values, branch selection (`comptime if`), and loop unrolling (`comptime for`). The `@parameter` decorator still applies to nested closures, but `@parameter if`/`@parameter for` are gone - use `comptime if`/`comptime for`.
+- Imports: stdlib modules are under the `std` package - `from std.sys import ...`, `from std.memory import ...`, `import std.math`. The `layout` package (`LayoutTensor`, `TileTensor`) is separate, not under `std`.
 
 Correctness and safety
-- Lifecycle via derived `Copyable`/`Movable` + synthesized `__init__(copy=)`/`__init__(take=)`. Never write `__copyinit__`/`__moveinit__`; never call lifecycle dunders directly. Structs are not copyable/movable by default - derive what you need.
+- Lifecycle via derived `Copyable`/`Movable` + synthesized constructors. Custom forms are keyword-only: `__init__(out self, *, copy: Self)` and `__init__(out self, *, deinit take: Self)`. Never write `__copyinit__`/`__moveinit__`; never call lifecycle dunders directly. Structs are not copyable/movable by default - derive what you need.
 - Move with `^`, borrow with `read`/`ref`, own with `var`. Rely on copy-to-move on last use, but verify hot paths.
 - `Optional[UnsafePointer[...]]` for nullable pointers (`UnsafePointer` is non-null as of v1.0.0b1).
 - Python interop: import whole modules inside functions (`Python.import_module("numpy")`), all values are `PythonObject`, keep hot loops in Mojo.
@@ -81,7 +84,7 @@ GPU
 Verify any unstable or non-obvious API against current upstream docs (Mojo is young; stdlib outside stabilized-API markers still changes):
 
 - Manual: https://mojolang.org/docs/manual/
-- Stdlib reference: https://mojolang.org/docs/stdlib/
+- Stdlib reference: https://mojolang.org/docs/std/
 - Releases / changelog (breaking changes by version): https://mojolang.org/releases/
 - GPU: https://mojolang.org/docs/manual/gpu/fundamentals/ and the intro tutorial under the same path
 - Ground-truth source (stdlib + MAX kernels): https://github.com/modular/modular
