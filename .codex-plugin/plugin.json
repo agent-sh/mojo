@@ -1,12 +1,12 @@
 {
   "name": "mojo",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Teach coding agents to write idiomatic, correct, performant, current Mojo (Modular's language)",
   "skills": "./skills",
   "interface": {
     "displayName": "Mojo",
     "shortDescription": "Write idiomatic, current Mojo",
-    "longDescription": "Helps agents write, port, review, and optimize Mojo. Embeds the Mojo v1.0.0b1 version map to prevent stale pre-2025 syntax (fn, owned/borrowed/inout, @value, NDBuffer), plus a high-signal correction layer for the things strong models get wrong: copy/ownership semantics and CPU/memory optimization, SIMD/vectorize/parallelize, GPU kernels (DeviceContext, LayoutTensor/TileTensor, flat_rank, warp ops), and Mojo/Python interop and extension modules.",
+    "longDescription": "Helps agents write, port, review, and optimize Mojo. Carries the Mojo 1.1 old-to-current map (def not fn, var/imm/mut not owned/read/inout, comptime not alias, Pointer with unsafe_ operations, max.gpu not std.gpu, TestSuite not mojo test) plus short verified references for memory and CPU performance, GPU kernels (DeviceContext, TileTensor, warps), and Python interop and extension modules.",
     "developerName": "Avi Fenesh",
     "category": "developer-tools",
     "capabilities": [

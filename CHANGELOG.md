@@ -7,8 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-24
+
 ### Changed
+- Retargeted from Mojo v1.0.0b1 to Mojo 1.1.0 (stable, 2026-09-17), verified against the 1.0.0b2, 1.0.0 and 1.1.0 changelogs, the 1.1 manual and standard library reference, and the MAX GPU docs.
+- Rewrote the skill for current models: a short trigger description, the toolchain check, the old-to-current table, rules that hold across tasks, and a definition of done. Detail moved to `references/memory-and-performance.md`, `references/gpu.md` and `references/python-interop.md`. Removed the all-caps headings, the "Do NOT" list that restated the table, the workflow steps and the `Skip unless` gates.
 - Refreshed plugin/marketplace/Codex manifest descriptions to reflect the v0.2.0 scope: CPU/memory optimization and Mojo/Python interop, not just SIMD and GPU.
+
+### Fixed
+- Stale or wrong for current Mojo: `read` (now `imm`; an error in 1.1), `UnsafePointer` and unprefixed pointer operations (now `Pointer` with `unsafe_*`), `alloc[T](count)` (now `Layout`-based `alloc`), `InlineArray`/`StringSlice` (now `Array`/`StringSpan`), `MutExternalOrigin` (now `MutUntrackedOrigin`), `std.gpu` imports (now `max.gpu`), `layout` as part of Mojo (now bundled with MAX), passing `Int` to kernels (no longer `DevicePassable`), the two-argument `enqueue_function` pattern, `@parameter` on closures (now `@__parameter`, legacy only), "no lambda" (Mojo has `lambda` since 1.0), iterating strings by code point (now graphemes), and `mojo package` (now `mojo precompile`).
+- Warp shuffle masks are `UInt`, not `UInt32` (offsets are `UInt32`).
+- `PyInit_*` exports need `abi("C")` and cannot raise.
 
 ## [0.2.0] - 2026-05-21
 

@@ -2,15 +2,14 @@
 
 A skill that teaches any coding agent to write idiomatic, correct, performant, current Mojo (Modular's language).
 
-Mojo is young and fast-moving. The dominant failure mode for agents is emitting 2023-2024-era syntax that now warns or fails to compile. This plugin ships an always-on stale-to-current version map plus focused guidance for fundamentals, performance, and GPU - so agents target the current language (Mojo v1.0.0b1), not their training data.
+Mojo is young and fast-moving, and most Mojo in model training data predates 1.0. The common failure is code that looks right from memory and no longer compiles. This plugin ships an old-to-current map for Mojo 1.1 plus short, verified references, so agents target the current language rather than their training data.
 
 ## What it does
 
-- Embeds a stale-to-current version map agents apply on every Mojo task: `def` not `fn`, `var`/`read`/`mut` not `owned`/`borrowed`/`inout`, `@fieldwise_init` not `@value`, synthesized `__init__(copy=)`/`__init__(take=)` not `__copyinit__`/`__moveinit__`, `TileTensor`/`LayoutTensor` not `NDBuffer`, `TestSuite` not the removed `mojo test` command.
-- Core rules for idiomatic structs, traits, ownership, `comptime` metaprogramming, and typed error handling.
-- Performance guidance: `SIMD`, `vectorize`/`parallelize`/`elementwise`, `@always_inline`, `LayoutTensor`, benchmarking.
-- GPU guidance: `DeviceContext`, kernels, the thread/block/grid model, shared memory, `barrier()`, warps, occupancy (NVIDIA / AMD / Apple).
-- Links to current upstream docs (mojolang.org) for depth, rather than bundling a deep-dive guide that would drift.
+- An old-to-current map applied on every Mojo task: `def` not `fn`, `var`/`imm`/`mut` not `owned`/`read`/`inout`, `comptime` not `alias` or `@parameter if`, unified closures and `lambda`, `Pointer` with `unsafe_` operations not `UnsafePointer`, `Array`/`StringSpan` renames, `max.gpu` not `std.gpu`, `TestSuite` not `mojo test`, `mojo precompile` not `mojo package`.
+- Rules that hold across tasks: explicit copies and moves, struct and trait model, typed `raises`, explicit numeric conversion, grapheme-aware strings, interior origins.
+- References for memory and CPU performance (pointers, allocation, SIMD, `vectorize`), GPU kernels (`DeviceContext`, `TileTensor`, warps, shared memory) and Python interop (bindings, extension modules).
+- A toolchain check first: when the installed `mojo` is older or newer than 1.1, the compiler wins.
 
 ## Installation
 
@@ -38,7 +37,8 @@ It does not activate for Python, Rust, C++, or Modular MAX serving/deployment co
 ## Layout
 
 ```
-skills/mojo/SKILL.md     the skill (version map + core rules + workflow + doc links)
+skills/mojo/SKILL.md     the skill (version map, core rules, doc links)
+skills/mojo/references/  memory and performance, GPU, Python interop
 .claude-plugin/          Claude Code plugin + marketplace manifests
 .codex-plugin/           Codex plugin manifest
 ```

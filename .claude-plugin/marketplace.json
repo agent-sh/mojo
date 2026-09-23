@@ -1,7 +1,7 @@
 {
   "name": "mojo",
-  "description": "Skill that teaches coding agents to write idiomatic, correct, performant, current Mojo - syntax, CPU/memory optimization, GPU kernels, and Mojo/Python interop. Targets Mojo v1.0.0b1 and prevents stale pre-2025 syntax.",
-  "version": "0.2.0",
+  "description": "Skill that teaches coding agents to write idiomatic, correct, performant, current Mojo - syntax, CPU/memory optimization, GPU kernels, and Mojo/Python interop. Targets Mojo 1.1 and replaces pre-1.0 syntax.",
+  "version": "0.3.0",
   "owner": {
     "name": "Avi Fenesh",
     "url": "https://github.com/avifenesh"
@@ -10,8 +10,8 @@
     {
       "name": "mojo",
       "source": "./",
-      "description": "Write idiomatic, correct, performant, current Mojo - syntax, ownership and CPU/memory optimization (copies, SIMD, vectorize/parallelize), GPU kernels (DeviceContext/LayoutTensor), and Mojo/Python interop. Targets Mojo v1.0.0b1 and prevents stale pre-2025 syntax.",
-      "version": "0.2.0",
+      "description": "Write idiomatic, correct, performant, current Mojo - syntax, ownership and CPU/memory optimization (copies, SIMD, vectorize/parallelize), GPU kernels (max.gpu, TileTensor), and Mojo/Python interop. Targets Mojo 1.1 and replaces pre-1.0 syntax.",
+      "version": "0.3.0",
       "category": "development"
     }
   ]
