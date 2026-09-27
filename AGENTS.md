@@ -12,9 +12,8 @@ Before writing, porting, or reviewing any Mojo, apply `skills/mojo/SKILL.md` and
 
 ## Project Instruction Files
 
-- `CLAUDE.md` is the project memory entrypoint for Claude Code.
-- `AGENTS.md` is a byte-for-byte copy of `CLAUDE.md` for tools that read `AGENTS.md` (Codex CLI, OpenCode, Cursor, Cline, Copilot).
-- Keep them identical. When editing one, update the other in the same commit.
+`AGENTS.md` is the repository instruction source. Keep directory-specific guidance
+in the corresponding nested `AGENTS.md`.
 
 ## Critical Rules
 
@@ -66,3 +65,12 @@ Before considering changes complete:
 - Mojo docs: https://mojolang.org/docs/ (canonical; old docs.modular.com Mojo URLs 301-redirect here)
 - Mojo releases / changelog: https://mojolang.org/releases/
 - https://agentskills.io
+
+## Validation scope
+
+Choose checks that cover the changed behavior. For CPU-only tooling, documentation
+and configuration changes, run the relevant CPU tests, static checks and configuration
+validation. Do not require a blanket GPU gate for those changes. Require GPU
+qualification when GPU, runtime or model behavior, or related claims, change.
+Preserve applicable native, model and hardware qualification gates. CPU checks do
+not qualify GPU behavior.
