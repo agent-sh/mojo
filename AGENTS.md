@@ -13,7 +13,7 @@ Before writing, porting or reviewing Mojo in this repo, apply `skills/mojo/SKILL
 - Output is plain text with the status markers `[OK]`, `[ERROR]`, `[WARN]`, `[CRITICAL]`, and no emojis or ASCII art.
 - In prose, write a spaced single dash (` - `), not ` -- ` or an em dash. CLI flags like `--help` are fine.
 - Put summaries, plans and audit notes in the PR or issue, not in committed files.
-- Changes reach main through a PR. Keep git hooks on, and answer every review comment, in the thread when you disagree.
+- Changes reach main through a PR. Answer every review comment, in the thread when you disagree.
 - When a script or tool fails, report the failure before working around it, so the tool gets fixed.
 - When goals conflict, rank them: plugin users' experience, automation that needs no babysitting, token cost, output quality, simplicity.
 
