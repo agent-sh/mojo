@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- AGENTS.md trimmed for current models: dropped the generic model-selection table, the GPU validation text, the Karpathy line, the "follow the flow exactly, no deviations" rule and the rule to wait for a `claude` workflow this repo does not have. The Mojo rename list now lives only in the skill. Conventions are stated once with their reasons, and Testing names the two checks CI runs. The skill is unchanged; it was rewritten for current models in 0.3.0.
+
 ## [0.3.0] - 2026-09-24
 
 ### Changed

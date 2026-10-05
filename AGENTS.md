@@ -4,73 +4,36 @@
 
 **Repository**: https://github.com/agent-sh/mojo
 
-Follow the Karpathy Guidelines (simplicity, surgical changes, clear success criteria) when editing this plugin.
+## Writing Mojo here
 
-## Writing Mojo (read first)
+Before writing, porting or reviewing Mojo in this repo, apply `skills/mojo/SKILL.md` over what you remember: Mojo changed a lot in 2025-2026, so pretrained syntax is likely stale and fails to compile. Target version: Mojo 1.1.0. Check unstable APIs against https://mojolang.org/docs/.
 
-Before writing, porting, or reviewing any Mojo, apply `skills/mojo/SKILL.md` and prefer it over pretrained knowledge. WHY: Mojo changed substantially in 2025-2026, so pretrained Mojo syntax is likely stale and will warn or fail to compile. The skill carries the old-to-current map (`def` not `fn`, `var`/`imm`/`mut` not `owned`/`read`/`inout`, `comptime` not `alias`, `Pointer` with `unsafe_` operations not `UnsafePointer`, GPU imports from `max` not `std`, `TestSuite` not `mojo test`) plus short references and links to current upstream docs. Target version: Mojo 1.1.0. Verify unstable APIs against https://mojolang.org/docs/, not memory.
+## Conventions
 
-## Project Instruction Files
+- Output is plain text with the status markers `[OK]`, `[ERROR]`, `[WARN]`, `[CRITICAL]`, and no emojis or ASCII art.
+- In prose, write a spaced single dash (` - `), not ` -- ` or an em dash. CLI flags like `--help` are fine.
+- Put summaries, plans and audit notes in the PR or issue, not in committed files.
+- Changes reach main through a PR. Keep git hooks on, and answer every review comment, in the thread when you disagree.
+- When a script or tool fails, report the failure before working around it, so the tool gets fixed.
+- When goals conflict, rank them: plugin users' experience, automation that needs no babysitting, token cost, output quality, simplicity.
 
-`AGENTS.md` is the repository instruction source. Keep directory-specific guidance
-in the corresponding nested `AGENTS.md`.
+## Skill conventions
 
-## Critical Rules
-
-1. **Plain text output** - No emojis, no ASCII art. Use `[OK]`, `[ERROR]`, `[WARN]`, `[CRITICAL]` for status markers.
-2. **No unnecessary files** - Create only the files a task needs; skip summary, plan, audit, and temp docs unless required.
-3. **Task is not done until it passes** - Every feature/fix needs quality tests, and `agnix` must be green before merge.
-4. **Create PRs for non-trivial changes** - No direct pushes to main.
-5. **Always run git hooks** - Let pre-commit and pre-push hooks run; never bypass them.
-6. **Use single dash for em-dashes** - In prose, use ` - ` (single dash with spaces), never ` -- `. Does not apply to CLI flags like `--help`.
-7. **Report script failures before manual fallback** - Surface broken tooling; never silently bypass it.
-8. **Address all PR review comments** - Even minor ones. If you disagree, respond in the review thread.
-9. **Wait for the claude workflow before merging** - It is the major quality gate and most thorough review; merge only after it passes.
-10. **Follow the skill/command flow exactly** - If a flow specifies subagents, tools, or phases, follow them in order with no deviations.
-11. **Token efficiency** - Save tokens over decorations.
-
-## Skill Conventions
-
-- `skills/mojo/SKILL.md` is the authoritative source of truth for how agents write Mojo; mirror any guidance added here into it.
+- `skills/mojo/SKILL.md` is the source of truth for how agents write Mojo; mirror any guidance added here into it.
 - Keep the skill file to the version map and the rules that apply to every task. Short, verified notes per area go in `skills/mojo/references/`; link to current upstream docs (mojolang.org, max.modular.com) for depth.
-- Prefer cross-tool features. Clearly gate any tool-specific behavior.
+- Prefer cross-tool features, and mark any tool-specific behavior as such.
 - Triggers should fire on realistic prompts ("write Mojo", "port this to Mojo", "is this Mojo idiomatic"). Keep the description short and name what it does not cover (pure Python, MAX serving).
-- Ground Mojo guidance in current upstream docs, not memory - the language is young and changes fast. Cite sources for non-obvious rules.
-
-## Model Selection
-
-| Model | When to Use |
-|-------|-------------|
-| **Opus** | Complex reasoning, analysis, planning |
-| **Sonnet** | Validation, pattern matching, most agents |
-| **Haiku** | Mechanical execution, no judgment needed |
-
-## Core Priorities
-
-1. User DX (plugin users first)
-2. Worry-free automation
-3. Token efficiency
-4. Quality output
-5. Simplicity
+- Ground Mojo guidance in current upstream docs, not memory, and cite sources for non-obvious rules: the language is young and changes fast.
 
 ## Testing
 
-Before considering changes complete:
-- Run `agnix` on the skill (zero errors).
-- Verify the skill activates on realistic prompts in Claude Code and at least one other tool (Cursor or Codex recommended).
+- `agnix --config .agnix.toml .` with zero errors, and `claude plugin validate .` for the manifests. CI runs both.
+- For a trigger or description change, check that the skill activates on realistic prompts in Claude Code and one other tool (Cursor or Codex).
+- Add a `CHANGELOG.md` entry under Unreleased.
 
 ## References
 
 - Part of the [agent-sh](https://github.com/agent-sh) ecosystem
-- Mojo docs: https://mojolang.org/docs/ (canonical; old docs.modular.com Mojo URLs 301-redirect here)
-- Mojo releases / changelog: https://mojolang.org/releases/
+- Mojo docs: https://mojolang.org/docs/ (canonical; old docs.modular.com Mojo URLs redirect here)
+- Mojo releases and changelog: https://mojolang.org/releases/
 - https://agentskills.io
-
-## Validation scope
-
-Choose checks that cover the changed behavior. For CPU-only tooling, documentation
-and configuration changes, run the relevant CPU tests, static checks and configuration
-validation. Do not require a blanket GPU gate for those changes. Require GPU
-qualification when GPU, runtime or model behavior, or related claims, change.
-Preserve applicable native, model and hardware qualification gates. CPU checks do
-not qualify GPU behavior.
